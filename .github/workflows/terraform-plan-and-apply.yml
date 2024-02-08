@@ -44,13 +44,13 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -input=false -out=tfplan
 
     - name: Save plan as artifact
       uses: actions/upload-artifact@v2
       with:
-        name: deployment-plan
-        path: output.json
+        name: tfplan
+        path: tfplan
 
   terraform-apply:
     name: 'Terraform Apply'
@@ -76,8 +76,8 @@ jobs:
     - name: 'Download artifact'
       uses: actions/download-artifact@v2
       with:
-        name: deployment-plan
-        path: output.json
+        name: tfplan
+        path: .
 
     - name: Apply Terraform changes
       run: terraform apply -auto-approve tfplan
