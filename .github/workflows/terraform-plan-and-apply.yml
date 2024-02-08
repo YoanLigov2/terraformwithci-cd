@@ -77,7 +77,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: deployment-plan
-        path: ./downloaded_plan
+        path: output.json
 
     - name: Apply Terraform changes
       run: terraform apply -auto-approve tfplan
